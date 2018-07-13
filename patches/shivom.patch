@@ -1,0 +1,65 @@
+From d1206102eb9a0844ae1d2917e472a365ac91fe5b Mon Sep 17 00:00:00 2001
+From: shivom007 <yashpaljoshi76@gmail.com>
+Date: Thu, 19 Apr 2018 09:29:29 +0000
+Subject: [PATCH] author info in about phone
+
+Change-Id: Ibc5d23968960a88801d7856688ec57b755071ad2
+---
+ res/values/strings.xml                           | 4 ++++
+ res/xml/device_info_settings.xml                 | 8 ++++++++
+ src/com/android/settings/DeviceInfoSettings.java | 1 +
+ 3 files changed, 13 insertions(+)
+
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index b8121fbd1f..b3d7bdf2e5 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -33,6 +33,8 @@
+     <!-- Device Info --> <skip />
+     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
+     <string name="device_info_default">Unknown</string>
++    <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
++    <string name="author_info_default">Yashpal Joshi - Shivom Techdroid</string>
+     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
+     <plurals name="show_dev_countdown">
+         <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
+@@ -2375,6 +2377,8 @@
+     <string name="firmware_version">Android version</string>
+     <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
+     <string name="security_patch">Android security patch level</string>
++    <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
++    <string name="author_info">Device Maintainer</string>
+     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
+     <string name="model_info">Model</string>
+     <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
+diff --git a/res/xml/device_info_settings.xml b/res/xml/device_info_settings.xml
+index d59486cc9e..a2fafe5755 100644
+--- a/res/xml/device_info_settings.xml
++++ b/res/xml/device_info_settings.xml
+@@ -137,6 +137,14 @@
+                         android:data="https://source.android.com/security/bulletin/" />
+         </PreferenceScreen>
+ 
++	<!-- Author Info -->
++	<PreferenceScreen android:key="author_info"
++		android:title="@string/author_info"
++		android:summary="@string/author_info_default">
++		<intent android:action="android.intent.action.VIEW"
++			android:data="https://github.com/shivom007" />
++	</PreferenceScreen>
++
+         <!-- Device FCC equipment id -->
+         <com.android.settings.DividerPreference
+                 android:key="fcc_equipment_id"
+diff --git a/src/com/android/settings/DeviceInfoSettings.java b/src/com/android/settings/DeviceInfoSettings.java
+index d8394dd04a..3704a03c99 100644
+--- a/src/com/android/settings/DeviceInfoSettings.java
++++ b/src/com/android/settings/DeviceInfoSettings.java
+@@ -69,6 +69,7 @@
+     private static final String KEY_BASEBAND_VERSION = "baseband_version";
+     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
+     private static final String KEY_SECURITY_PATCH = "security_patch";
++    private static final String KEY_AUTHOR_INFO = "author_info";
+     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
+     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
+     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
